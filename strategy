@@ -1,0 +1,31 @@
+"goes offline every third day because of local demands"
+  start with: the plant runns on days 1,2,4,5,7,8,10,11,13,14,16,17...97,98,100,101,103,104
+  when comissioned for k days, it runs for 2*(k/3)+(k%3) days
+  
+  r = 2*(k/3)+(k%3)
+  
+  
+"has to go offline for maintenance every 100 days"
+  the plant does not run on days 100,200,300...n*100 (n = 1,2,3...)
+  it runs on: 1,2,4,5,7,8,10,11,13,14,16,17...97,98,101,103,104
+  it runs for 2*(k/3)+(k%3)  -(k/100) when that day not off already.
+  already off at day 300,600,900...
+  number of days  0-1 1-2 2-3 3-4 4-5 5-6 6-7 7-8
+  extra off       0 1 1 2 2 2 2 3 3   4   4   5
+  subtract this from former days running: k/100-k/300
+  
+  r = 2*(k/3)+(k%3)-(k/100-k/300)
+  
+  
+"on every 14th day , the powerplant is turned off for refueling"
+  the plant does not run on days 14,28,42,56,70,84,98,112
+  it runs on: 1,2,4,5,7,8,10,11,13,  16,17,19,20...25,26,  29,31
+  subtract 1 for each 14, but only 2/3 of them
+  (2*((k/14)/3) + ((k/14)%3))
+  also remember not to subtract when aligned w/day n*100
+  at k = 700,1400,2100,2800,3500,4200
+  currently we subtract at 700 because of 14th rule and 100th rule
+  need to add 1 per 700
+  +k/700
+  
+  r = 2*(k/3)+(k%3)-(k/100-k/300) - (2*((k/14)/3) + ((k/14)%3)) + k/700
